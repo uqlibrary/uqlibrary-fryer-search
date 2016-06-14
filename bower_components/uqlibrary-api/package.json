@@ -1,0 +1,30 @@
+{
+  "name": "uqlibrary-api",
+  "version": "1.0.0",
+  "description": "Web component to make calls for data",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "wct"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uqlibrary/uqlibrary-api.git"
+  },
+  "keywords": [
+    "research",
+    "uq",
+    "library"
+  ],
+  "bugs": {
+    "url": "https://github.com/uqlibrary/uqlibrary-api/issues"
+  },
+  "devDependencies": {
+    "web-component-tester": "~4.2.2"
+  },
+  "dependencies": {
+    "bower": "~1.7.7"
+  }
+}

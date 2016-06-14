@@ -1,0 +1,29 @@
+{
+  "name": "uqlibrary-fryer-search",
+  "version": "1.0",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "private": true,
+  "main": "uqlibrary-fryer-search.html",
+  "dependencies": {
+    "byutv-jsonp": "uqlibrary/byutv-jsonp#master",
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-dropdown": "PolymerElements/iron-dropdown#^1.0.0",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.0",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.0",
+    "polymer": "Polymer/polymer#^1.4.0",
+    "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.3",
+    "uqlibrary-iron-dropdown": "uqlibrary/uqlibrary-iron-dropdown#^1.2.2",
+    "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.0",
+    "webcomponentsjs": "^0.7.12"
+  },
+  "devDependencies": {
+    "web-component-tester": "*",
+    "test-fixture": "PolymerElements/test-fixture#^1.0.0"
+  },
+  "resolutions": {
+  }
+}

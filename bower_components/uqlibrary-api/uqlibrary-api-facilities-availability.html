@@ -1,0 +1,161 @@
+<link rel="import" href="elements.html">
+
+<!--
+Element providing facilities availability.
+
+##### Example
+
+    <uqlibrary-api-facilities-availability></uqlibrary-api-facilities-availability>
+
+@element uqlibrary-api-facilities-availability
+@blurb Element providing facilities availability.
+@status alpha
+@homepage https://github.com/uqlibrary/uqlibrary-api
+-->
+<dom-module id="uqlibrary-api-facilities-availability">
+  <template>
+    <uqlibrary-api id="facilities" uri="/facilities_availability"></uqlibrary-api>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        is: 'uqlibrary-api-facilities-availability',
+        properties: {
+          /**
+           * Fired when the object has loaded.
+           */
+          baseUri: {
+            type: String,
+            value: '/facilities_availability'
+          },
+          /**
+           * Whether to format the results coming from the API into a flat room list. Also fixes campus and building
+           * names that are incorrect.
+           */
+          processed: {
+            type: Object,
+            value: false
+          }
+        },
+        ready: function () {
+          var self = this;
+          this.$.facilities.addEventListener('uqlibrary-api', function (e) {
+            self.facilities = (self.processed ? self._processData(e.detail) : e.detail);
+            self.fire('uqlibrary-api-facilities-availability-loaded', self.facilities);
+          });
+        },
+        /**
+         * Takes the data from the api and returns a properly formatted list of rooms
+         */
+        _processData: function (data) {
+          var self = this;
+          var roomList = {};
+
+          _.forEach(data, function (facility) {
+            _.forEach(facility.resources, function (resource) {
+              _.forEach(resource.facilities, function (room) {
+                if (room.status == "u") { return; }
+                // Add room to general Rooms array
+                var buildingImageName = room.building.replace(/\s/g, '_').replace(/\W/g, '').toLowerCase();
+                var campusImageName = room.campus.replace(/\s/g, '_').replace(/\W/g, '').toLowerCase();
+
+                roomList[room.id] = {
+                  id: room.id,
+                  scheduleid: room.scheduleid,
+                  title: room.title,
+                  campus: self._fixCampusName(room),
+                  building: self._fixBuildingName(room),
+                  location: room.location,
+                  capacity: room.capacity,
+                  maxtime: room.maxtime,
+                  mintime: room.mintime,
+                  bookings: room.bookings,
+                  available_from: resource.schedule.available_from,
+                  available_to: resource.schedule.available_to,
+                  url: room.url,
+                  notes: room.notes,
+                  next_available_time: null,
+                  next_available_time_text: '',
+                  time_span: resource.schedule['time_span'],
+                  image : campusImageName + '/' + buildingImageName + '_thumb' + '.jpg',
+                  imageLarge : campusImageName + '/' + buildingImageName + '.jpg'
+                };
+              });
+            });
+          });
+
+          return roomList;
+        },
+        /**
+         * Fixes bad data from the API
+         */
+        _fixCampusName: function (room) {
+          var campusReplacements = {
+            "ST LUCIA": "St Lucia"
+          };
+
+          if (campusReplacements[room.campus]) {
+            return campusReplacements[room.campus];
+          } else {
+            return room.campus;
+          }
+        },
+        /**
+         * Fixes bad data from the API
+         */
+        _fixBuildingName: function (room) {
+          var buildingReplacements = {
+            "94": "Biological Sciences Library (#94)",
+            "Hawken Building 50": "Hawken Building (#50)",
+            "Hawken Bldg (#50)": "Hawken Building (#50)",
+            "2, Duhig Tower": "Duhig Bldg (#2)",
+            "Duhig North (12)": "Duhig North Bldg (#12)",
+            "Duhig North 12": "Duhig North Bldg (#12)",
+            "Duhig North": "Duhig North Bldg (#12)",
+            "Duhig North12": "Duhig North Bldg (#12)",
+            "Duhig Bldg (#12)": "Duhig North Bldg (#12)",
+            "": "Duhig North Bldg (#12)"
+          };
+
+          if (buildingReplacements[room.building]) {
+            return buildingReplacements[room.building];
+          } else {
+            return room.building;
+          }
+        },
+        /**
+         * Constructs the URL used by the API
+         */
+        constructUrl: function (args, baseUrl) {
+          var url = baseUrl;
+          if (args && args.date) {
+            url += '?date=' + args.date;
+          }
+          if (args && args.id && args.ptype) {
+            url += url.indexOf('?') >= 0 ? '&' : '?';
+            url += 'id=' + args.id;
+            url += '&ptype=' + args.ptype;
+          }
+          if (args && args.nocache) {
+            url += url.indexOf('?') >= 0 ? '&' : '?';
+            url += 'nocache=true';
+          }
+          return url;
+        },
+        /**
+         * Gets facilities availability.
+         * args is optional parameter (as per facilities availability API):
+         *  date - specify availability date DD-MM-YYYY
+         *  id - specify user id, ptype - specify user type
+         *  nocache - set to true to avoid using cached data
+         * @method get
+         */
+        get: function (args) {
+          var url = this.constructUrl(args, this.baseUri);
+          this.set('$.facilities.uri', url);
+          this.$.facilities.get({ addTimestamp: args && args.nocache });
+        }
+      });
+    }());
+  </script>
+</dom-module>
