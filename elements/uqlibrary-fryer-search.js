@@ -34,25 +34,25 @@
         type: Object,
         value: {
           summon: {
-            url: 'http://uq.summon.serialssolutions.com/#!/search?q=',
+            urlRoot: 'http://uq.summon.serialssolutions.com/#!/search?q=',
             urlAppend: '&ho=t&fvf=ContentType,Trade Publication Article,t|Library,Fryer,f|ContentType,Newspaper Article,t|ContentType,Manuscript,f&l=en-AU',
             searchLabel: 'Search for manuscript material'
           },
 
           primo: {
-            url: 'http://search.library.uq.edu.au/primo_library/libweb/action/search.do?vl(freeText0)=',
+            urlRoot: 'http://search.library.uq.edu.au/primo_library/libweb/action/search.do?vl(freeText0)=',
             urlAppend: '&fn=search&ct=facet&fctN=facet_library&fctV=61UQ_FRY&rfnGrp=1&rfnGrpCounter=1&frbg=&&indx=1&dscnt=0&vl(1UIStartWith0)=contains&scp.scps=scope%3A(61UQ)%2Cprimo_central_multiple_fe&tb=t&vid=61UQ&mode=Basic&ct=search&srt=rank&tab=61uq_all&vl(D75285834UI0)=any',
             searchLabel: 'Search for manuscript material'
           },
 
           espace: {
-            url: 'http://espace.library.uq.edu.au/list/?search_keys[0]=',
+            urlRoot: 'http://espace.library.uq.edu.au/list/?search_keys[0]=',
             urlAppend: '&sort_by=searchKey0&cat=quick_filter&search_keys[core_8]=UQ:278419',
             searchLabel: 'Search for digitised material'
           },
 
           google: {
-           url: 'https://www.google.com.au/#q=',
+           urlRoot: 'https://www.google.com.au/#q=',
            urlAppend: '+site:www.library.uq.edu.au/fryer-library/ms',
            searchLabel: 'Search all manuscript finding aids'
          }
@@ -80,7 +80,7 @@
 
       var searchText = this.$.searchKeywordInput.value;
 
-      var searchUrl = this._selectedSource.url + searchText;
+      var searchUrl = this._selectedSource.urlRoot + searchText;
       if (this._selectedSource.urlAppend) {
         searchUrl += this._selectedSource.urlAppend;
       }
@@ -94,22 +94,30 @@
       this.$.searchKeywordInput.selectedSuggestion = null;
     },
 
+    /*
+     * Chooses the correct search details by parameter.
+     */
+    _setSelectedSearchType: function(aSearchType) {
+      this._selectedSource = this._sources[aSearchType];
+    },
+
 
     /*
      * Sets the selected source according to the search type.
      */
     _searchTypeChanged: function() {
       if (typeof(this._sources) !== undefined && this._sources.hasOwnProperty(this.searchType)) {
-        this._selectedSource = this._sources[this.searchType];
+        this._setSelectedSearchType(this.searchType);
       }
 
     },
-
+    
 
     ready: function() {
       // When a valid search type is not provided, defaults to google.
       if (typeof(this.searchType) !== undefined && this._selectedSource === undefined) {
-        this._selectedSource = this._sources.google;
+        this.searchType = 'google';
+        this._setSelectedSearchType(this.searchType);
       }
 
     }

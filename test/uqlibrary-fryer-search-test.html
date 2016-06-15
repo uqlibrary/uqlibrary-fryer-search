@@ -12,7 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html>
 <head>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>uql-ia-button</title>
+    <title>uqlibrary-fryer-search</title>
 
     <script src="../../webcomponentsjs/webcomponents.min.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
@@ -20,38 +20,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link rel="import" href="../../test-fixture/test-fixture.html">
 
     <!-- Import the element to test -->
-    <link rel="import" href="../elements/uqlibrary-search.html">
+    <link rel="import" href="../elements/uqlibrary-fryer-search.html">
 
 </head>
 <body>
 
 <test-fixture id="basic">
     <template>
-        <uqlibrary-search></uqlibrary-search>
+        <uqlibrary-fryer-search></uqlibrary-fryer-search>
+    </template>
+</test-fixture>
+
+<test-fixture id="invalidSearchType">
+    <template>
+        <uqlibrary-fryer-search search-type="somethinginvalid"></uqlibrary-fryer-search>
+    </template>
+</test-fixture>
+
+<test-fixture id="prismSearchExample">
+    <template>
+        <uqlibrary-fryer-search search-type="primo"></uqlibrary-fryer-search>
     </template>
 </test-fixture>
 
 <script>
-    suite('<uqlibrary-search> tests', function () {
+    suite('<uqlibrary-fryer-search> tests', function () {
         var testObj;
 
         setup(function () {
             document.cookie="UQLMockData=enabled";
 
             testObj = fixture('basic');
+            validSearchObject = fixture('prismSearchExample');
+            invalidSearchObject = fixture('invalidSearchType');
         });
 
-        test('Display uqlibrary-search elements', function (done) {
+        test('Display uqlibrary-fryer-search elements', function (done) {
             // Data bindings will stamp out new DOM asynchronously
             // so wait to check for updates
             flush(function () {
 
-                var sources = testObj.querySelector('#menuSources');
-
-                expect(sources).to.not.be.null;
-                expect(sources).to.be.visible;
-
-                var inputKeyword = testObj.querySelector('#inputKeyword');
+                var inputKeyword = testObj.querySelector('#searchKeywordInput');
 
                 expect(inputKeyword).to.not.be.null;
                 expect(inputKeyword).to.be.visible;
@@ -66,62 +75,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             });
         });
 
-        test('Test search sources', function (done) {
+        test('When the search type is NOT supplied, default to google', function (done) {
             // Data bindings will stamp out new DOM asynchronously
             // so wait to check for updates
             flush(function () {
-
-                var sources = testObj.querySelector('#menuSources');
-
-                expect(sources).to.not.be.null;
-                expect(sources).to.be.visible;
-
-                var sourceItems = sources.querySelectorAll('paper-item');
-                expect(sourceItems.length).to.be.equal(9);
-
+                expect(testObj.searchType).to.be.equal('google');
                 done();
+
             });
         });
 
-        test('Test aria label is set for search sources', function (done) {
+        test('When an invalid search type is supplied, default to google', function (done) {
             // Data bindings will stamp out new DOM asynchronously
             // so wait to check for updates
             flush(function () {
 
-                var sources = testObj.querySelector('#inputSources');
-
-                var ariaLabel = sources.attributes['aria-label'];
-
-                expect(ariaLabel).to.not.be.null;
-                expect(ariaLabel).not.to.equal('');
-
+                expect(invalidSearchObject.searchType).to.be.equal('google');
                 done();
+
             });
         });
 
-        test('Display autosuggestions', function (done) {
+        test('When a valid search type is supplied, use it', function (done) {
             // Data bindings will stamp out new DOM asynchronously
             // so wait to check for updates
             flush(function () {
 
-                var inputKeyword = testObj.querySelector('#inputKeyword');
-                var menuSuggestions = testObj.querySelector('#listSuggestions');
+                expect(validSearchObject.searchType).to.be.equal('primo');
+                done();
 
-                expect(menuSuggestions).to.not.be.null;
-                expect(menuSuggestions).not.to.be.visible;
-
-                inputKeyword.value = "search";
-
-                setTimeout(function(){
-                    expect(menuSuggestions).to.not.be.null;
-                    expect(menuSuggestions).to.be.visible;
-
-                    var items = menuSuggestions.querySelectorAll('paper-item');
-
-                    expect(items.length).to.be.above(0);
-
-                    done();
-                }, 1900);
             });
         });
 
