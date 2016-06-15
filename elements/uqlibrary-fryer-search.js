@@ -91,7 +91,6 @@
       }, 100);
 
       this.$.ga.addEvent(this.searchType, searchText);
-      this.$.searchKeywordInput.selectedSuggestion = null;
     },
 
     /*
