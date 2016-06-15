@@ -50,34 +50,17 @@ Search on eSpace
       margin-top: 9px;
     }
 
-    @media screen and (max-width: 815px) {
-      :host {
-        @apply(--layout-flex-none);
-      }
-
+    @media screen and (max-width: 350px) {
       #searchKeywordInput {
-        min-width: calc(100% - 105px);
+        min-width: 160px;
       }
     }
-
-    @media screen and (max-width: 320px) {
-      #inputSources {
-        min-width: 100%;
-      }
-    }
-
-    paper-card #searchKeywordInput {
-      width: 20em;
-    }
-
   </style>
 
     <uqlibrary-ga id="ga" app-name="{{gaAppName}}"></uqlibrary-ga>
 
-    <paper-card>
-      <iron-a11y-keys target="[[_inputKeywordTarget]]" keys="enter" on-keys-pressed="_searchActivated"></iron-a11y-keys>
-      <paper-input id="searchKeywordInput" label="[[_selectedSource.searchLabel]]"></paper-input>
-    </paper-card>
+    <iron-a11y-keys target="[[_inputKeywordTarget]]" keys="enter" on-keys-pressed="_searchActivated"></iron-a11y-keys>
+    <paper-input id="searchKeywordInput" label="[[_selectedSource.searchLabel]]"></paper-input>
 
     <paper-button id="buttonSearch" role="button" on-tap="_searchActivated" class="button-colored-accent"
                   aria-label="Search [[selectedSource.title]]" title="Search [[selectedSource.title]]">
