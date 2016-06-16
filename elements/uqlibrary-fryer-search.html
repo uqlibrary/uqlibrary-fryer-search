@@ -24,48 +24,64 @@ Search on eSpace
 <dom-module id="uqlibrary-fryer-search">
   <template>
     <style is="custom-style" include="common-styles">
-    :host {
-      font-family: var(--font-family);
-      font-size: var(--body-font-size);
+      :host {
+        font-family: var(--font-family);
+        font-size: var(--body-font-size);
 
-      @apply(--layout-horizontal);
-      @apply(--layout-wrap);
-    }
-
-    #buttonSearch {
-      @apply(--layout-flex-1);
-    }
-
-    #searchKeywordInput {
-      margin-right: 8px;
-      padding-left: 8px;
-      padding-right: 4px;
-      background-color: var(--secondary-color-light);
-      border-radius: 3px;
-      min-width: 210px;
-      @apply(--layout-flex);
-    }
-
-    #buttonSearch iron-icon {
-      margin-top: 9px;
-    }
-
-    @media screen and (max-width: 350px) {
-      #searchKeywordInput {
-        min-width: 160px;
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
       }
-    }
-  </style>
+
+      #buttonSearch {
+        @apply(--layout-flex-1);
+      }
+
+      #searchKeywordInput {
+        margin-right: 8px;
+        padding-left: 8px;
+        padding-right: 4px;
+        border-radius: 3px;
+        min-width: 210px;
+        @apply(--layout-flex);
+      }
+
+      #buttonSearch iron-icon {
+        margin-top: 9px;
+      }
+
+      @media screen and (max-width: 350px) {
+        paper-button {
+        }
+      }
+
+      .container {
+        @apply(--shadow-elevation-2dp);
+        width: 100%;
+        padding: 1em;
+      }
+      paper-input {
+        padding-right: 80px;
+      }
+      paper-input paper-input-container {
+        margin-right: 200px;
+      }
+      paper-button {
+        float: right;
+        width: auto;
+      }
+    </style>
 
     <uqlibrary-ga id="ga" app-name="{{gaAppName}}"></uqlibrary-ga>
 
-    <iron-a11y-keys target="[[_inputKeywordTarget]]" keys="enter" on-keys-pressed="_searchActivated"></iron-a11y-keys>
-    <paper-input id="searchKeywordInput" label="[[_selectedSource.searchLabel]]"></paper-input>
+    <div class="container">
+      <iron-a11y-keys target="[[_inputKeywordTarget]]" keys="enter" on-keys-pressed="_searchActivated"></iron-a11y-keys>
+      <paper-button id="buttonSearch" role="button" on-tap="_searchActivated" class="button-colored-accent"
+                    aria-label="Search [[selectedSource.title]]" title="Search [[selectedSource.title]]">
+        <iron-icon icon="icons:search" aria-label="Search [[selectedSource.title]]"></iron-icon>
+      </paper-button>
+      <paper-input id="searchKeywordInput" label="[[_selectedSource.searchLabel]]"></paper-input>
 
-    <paper-button id="buttonSearch" role="button" on-tap="_searchActivated" class="button-colored-accent"
-                  aria-label="Search [[selectedSource.title]]" title="Search [[selectedSource.title]]">
-      <iron-icon icon="icons:search" aria-label="Search [[selectedSource.title]]"></iron-icon>
-    </paper-button>
+    </div>
 
 
 
