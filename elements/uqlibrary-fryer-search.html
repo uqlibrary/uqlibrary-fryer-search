@@ -24,22 +24,23 @@ Search on eSpace
 <dom-module id="uqlibrary-fryer-search">
   <template>
     <style is="custom-style" include="common-styles">
+
       :host {
         font-family: var(--font-family);
         font-size: var(--body-font-size);
-
-        @apply(--layout-horizontal);
-        @apply(--layout-wrap);
       }
 
-      #buttonSearch {
-        @apply(--layout-flex-1);
+      paper-card {
+        padding: 16px;
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
       }
 
       #searchKeywordInput {
         margin-right: 8px;
         padding-left: 8px;
         padding-right: 4px;
+        background-color: var(--secondary-color-light);
         border-radius: 3px;
         min-width: 210px;
         @apply(--layout-flex);
@@ -50,41 +51,27 @@ Search on eSpace
       }
 
       @media screen and (max-width: 350px) {
-        paper-button {
+        #searchKeywordInput {
+          min-width: 160px;
         }
-      }
 
-      .container {
-        @apply(--shadow-elevation-2dp);
-        width: 100%;
-        padding: 1em;
-      }
-      paper-input {
-        padding-right: 80px;
-      }
-      paper-input paper-input-container {
-        margin-right: 200px;
-      }
-      paper-button {
-        float: right;
-        width: auto;
+        #buttonSearch {
+          margin: 8px auto;
+          @apply(--layout-center);
+        }
       }
     </style>
 
     <uqlibrary-ga id="ga" app-name="{{gaAppName}}"></uqlibrary-ga>
 
-    <div class="container">
+    <paper-card elevation="1">
       <iron-a11y-keys target="[[_inputKeywordTarget]]" keys="enter" on-keys-pressed="_searchActivated"></iron-a11y-keys>
+      <paper-input id="searchKeywordInput" label="[[_selectedSource.searchLabel]]"></paper-input>
       <paper-button id="buttonSearch" role="button" on-tap="_searchActivated" class="button-colored-accent"
                     aria-label="Search [[selectedSource.title]]" title="Search [[selectedSource.title]]">
         <iron-icon icon="icons:search" aria-label="Search [[selectedSource.title]]"></iron-icon>
       </paper-button>
-      <paper-input id="searchKeywordInput" label="[[_selectedSource.searchLabel]]"></paper-input>
-
-    </div>
-
-
-
+    </paper-card>
   </template>
 
   <script src="uqlibrary-fryer-search.js"></script>
