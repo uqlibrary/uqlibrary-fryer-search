@@ -34,6 +34,7 @@ Search on eSpace
         padding: 16px;
         @apply(--layout-horizontal);
         @apply(--layout-wrap);
+        @apply(--shadow-elevation-2dp);
       }
 
       #searchKeywordInput {
@@ -50,14 +51,19 @@ Search on eSpace
         margin-top: 9px;
       }
 
-      @media screen and (max-width: 350px) {
-        #searchKeywordInput {
-          min-width: 160px;
+      #buttonSearch {
+        margin: 8px auto;
+        @apply(--layout-center);
+      }
+      /* media width of 365 & searchKeywordInput width of 242 needed to fit in google-type label */
+      @media screen and (max-width: 365px) {
+        paper-card {
+          margin-left: 8px;
+          margin-right: 8px;
+          padding: 4px;
         }
-
-        #buttonSearch {
-          margin: 8px auto;
-          @apply(--layout-center);
+        #searchKeywordInput {
+          min-width: 242px;
         }
       }
     </style>
