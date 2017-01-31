@@ -1,5 +1,8 @@
 # uqlibrary-fryer-search
 
+[![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-fryer-search.svg)](https://david-dm.org/uqlibrary/uqlibrary-fryer-search)
+[![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-fryer-search/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-fryer-search?type=dev)
+
 uqlibrary-fryer-search is a search form for Fryer Library
 
 There is currently no documentation at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-fryer-search).
