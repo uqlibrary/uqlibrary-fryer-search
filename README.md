@@ -4,6 +4,10 @@ uqlibrary-fryer-search is a search form for Fryer Library
 
 There is currently no documentation at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-fryer-search).
 
+This component is only used in Drupal, called from [Search manuscript collections](https://web.library.uq.edu.au/locations-hours/fryer-library/search-manuscript-collections).
+
+A commit to github will deploy and drupal will automatically pick up the new version.
+
 ### Getting Started
 Install Node.JS and run the following oneliner in the project directory:
 ```sh
