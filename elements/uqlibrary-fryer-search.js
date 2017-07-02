@@ -33,12 +33,6 @@
       _sources: {
         type: Object,
         value: {
-          summon: {
-            urlRoot: 'http://uq.summon.serialssolutions.com/#!/search?q=',
-            urlAppend: '&ho=t&fvf=ContentType,Trade Publication Article,t|Library,Fryer,f|ContentType,Newspaper Article,t|ContentType,Manuscript,f&l=en-AU',
-            searchLabel: 'Search for manuscript material'
-          },
-
           primo: {
             urlRoot: 'http://search.library.uq.edu.au/primo_library/libweb/action/search.do?vl(freeText0)=',
             urlAppend: '&ct=facet&fctN=facet_rtype&fctV=Manuscripts&rfnGrp=2&rfnGrpCounter=2&frbg=&rfnGrpCounter=1&fn=search&indx=1&dscnt=0&scp.scps=scope%3A(61UQ)%2Cprimo_central_multiple_fe&vl(1UIStartWith0)=contains&tb=t&vid=61UQ&fctV=61UQ_FRY&mode=Basic&ct=facet&rfnGrp=1&tab=61uq_all&srt=rank&fctN=facet_library&vl(D75285834UI0)=any&dum=true',
