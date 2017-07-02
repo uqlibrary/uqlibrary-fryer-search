@@ -34,8 +34,8 @@
         type: Object,
         value: {
           primo: {
-            urlRoot: 'http://search.library.uq.edu.au/primo_library/libweb/action/search.do?vl(freeText0)=',
-            urlAppend: '&ct=facet&fctN=facet_rtype&fctV=Manuscripts&rfnGrp=2&rfnGrpCounter=2&frbg=&rfnGrpCounter=1&fn=search&indx=1&dscnt=0&scp.scps=scope%3A(61UQ)%2Cprimo_central_multiple_fe&vl(1UIStartWith0)=contains&tb=t&vid=61UQ&fctV=61UQ_FRY&mode=Basic&ct=facet&rfnGrp=1&tab=61uq_all&srt=rank&fctN=facet_library&vl(D75285834UI0)=any&dum=true',
+            urlRoot: 'https://search.library.uq.edu.au/primo-explore/search?query=any,contains,',
+            urlAppend: '&tab=61uq_all&search_scope=61UQ_All&sortby=rank&vid=61UQ&facet=library,include,61UQ_FRY&facet=rtype,include,Manuscripts&offset=0',
             searchLabel: 'Search for manuscript material'
           },
 
