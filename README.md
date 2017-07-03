@@ -9,8 +9,6 @@ There is currently no documentation at [GitHub Pages](http://uqlibrary.github.io
 
 This component is only used in Drupal, called from [Search manuscript collections](https://web.library.uq.edu.au/locations-hours/fryer-library/search-manuscript-collections).
 
-A commit to github will deploy and drupal will automatically pick up the new version.
-
 ### Getting Started
 Install Node.JS and run the following oneliner in the project directory:
 ```sh
@@ -27,3 +25,9 @@ Tests are run using the Web Component Tester. Either navigate to /tests/index.ht
 ```sh
 wct --local all
 ```
+
+### Deployment
+
+Commit to github, create a new release, then update the bower.json version in [Reusable Components](https://github.com/uqlibrary/uqlibrary-reusable-components/blob/master/bower.json)
+
+ITS Drupal will automatically pick up a new version of prod Reusable Components
