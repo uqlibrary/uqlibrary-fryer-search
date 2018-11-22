@@ -1,6 +1,6 @@
 {
   "name": "uqlibrary-fryer-search",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "keywords": [
     "seed",
     "polymer",
@@ -13,12 +13,11 @@
     "iron-elements": "PolymerElements/iron-elements#^1.0.0",
     "paper-elements": "PolymerElements/paper-elements#^1.0.0",
     "polymer": "Polymer/polymer#^1.4.0",
-    "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.3",
-    "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.5",
+    "uqlibrary-ga": "uqlibrary/uqlibrary-ga",
+    "uqlibrary-styles": "uqlibrary/uqlibrary-styles",
     "webcomponentsjs": "^0.7.12"
   },
   "devDependencies": {
-    "web-component-tester": "^4.2.2",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0"
+    "web-component-tester": "*"
   }
 }
