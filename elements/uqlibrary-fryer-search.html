@@ -3,20 +3,21 @@
 <!--
 `<uqlibrary-fryer-search>` enables search of UQ Fryer Library on various types:
 
-Example:
+Examples:
 
-Search on Primo (from June 27 2016)
-<uqlibrary-fryer-search search-type="primo"></uqlibrary-fryer-search>
+Search on Primo (from June 27 2016):
 
-Search on Google
-<uqlibrary-fryer-search search-type="google"></uqlibrary-fryer-search>
+    <uqlibrary-fryer-search search-type="primo"></uqlibrary-fryer-search>
 
-Search on eSpace
-<uqlibrary-fryer-search search-type="espace"></uqlibrary-fryer-search>
+Search on Google:
+
+    <uqlibrary-fryer-search search-type="google"></uqlibrary-fryer-search>
+
+Search on eSpace:
+
+    <uqlibrary-fryer-search search-type="espace"></uqlibrary-fryer-search>
 
 @demo
-
-@demo demo/index.html Demo of uqlibrary-fryer-search
 -->
 <dom-module id="uqlibrary-fryer-search">
   <template>
@@ -29,9 +30,9 @@ Search on eSpace
 
       paper-card {
         padding: 16px;
-        @apply(--layout-horizontal);
-        @apply(--layout-wrap);
-        @apply(--shadow-elevation-2dp);
+        @apply --layout-horizontal;
+        @apply --layout-wrap;
+        @apply --shadow-elevation-2dp;
       }
 
       #searchKeywordInput {
@@ -41,7 +42,7 @@ Search on eSpace
         background-color: var(--secondary-color-light);
         border-radius: 3px;
         min-width: 210px;
-        @apply(--layout-flex);
+        @apply --layout-flex;
       }
 
       #buttonSearch iron-icon {
@@ -50,7 +51,7 @@ Search on eSpace
 
       #buttonSearch {
         margin: 0 auto;
-        @apply(--layout-center);
+        @apply --layout-center;
       }
       /* media width of 365 & searchKeywordInput width of 242 needed to fit in google-type label */
       @media screen and (max-width: 365px) {
