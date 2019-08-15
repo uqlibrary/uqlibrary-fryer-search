@@ -1,0 +1,82 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-fryer-search>` enables search of UQ Fryer Library on various types:
+
+Examples:
+
+Search on Primo (from June 27 2016):
+
+    <uqlibrary-fryer-search search-type="primo"></uqlibrary-fryer-search>
+
+Search on Google:
+
+    <uqlibrary-fryer-search search-type="google"></uqlibrary-fryer-search>
+
+Search on eSpace:
+
+    <uqlibrary-fryer-search search-type="espace"></uqlibrary-fryer-search>
+
+@demo
+-->
+<dom-module id="uqlibrary-fryer-search">
+  <template>
+    <style is="custom-style" include="common-styles">
+
+      :host {
+        font-family: var(--font-family);
+        font-size: var(--body-font-size);
+      }
+
+      paper-card {
+        padding: 16px;
+        @apply --layout-horizontal;
+        @apply --layout-wrap;
+        @apply --shadow-elevation-2dp;
+      }
+
+      #searchKeywordInput {
+        margin-right: 8px;
+        padding-left: 8px;
+        padding-right: 4px;
+        background-color: var(--secondary-color-light);
+        border-radius: 3px;
+        min-width: 210px;
+        @apply --layout-flex;
+      }
+
+      #buttonSearch iron-icon {
+        margin-top: 9px;
+      }
+
+      #buttonSearch {
+        margin: 0 auto;
+        @apply --layout-center;
+      }
+      /* media width of 365 & searchKeywordInput width of 242 needed to fit in google-type label */
+      @media screen and (max-width: 365px) {
+        paper-card {
+          margin-left: 8px;
+          margin-right: 8px;
+          padding: 4px;
+        }
+        #searchKeywordInput {
+          min-width: 242px;
+        }
+      }
+    </style>
+
+    <uqlibrary-ga id="ga" app-name="{{gaAppName}}"></uqlibrary-ga>
+
+    <paper-card elevation="1">
+      <iron-a11y-keys target="[[_inputKeywordTarget]]" keys="enter" on-keys-pressed="_searchActivated"></iron-a11y-keys>
+      <paper-input id="searchKeywordInput" label="[[_selectedSource.searchLabel]]"></paper-input>
+      <paper-button id="buttonSearch" role="button" on-tap="_searchActivated" class="button-colored-accent"
+                    aria-label="Search [[selectedSource.title]]" title="Search [[selectedSource.title]]">
+        <iron-icon icon="icons:search" aria-label="Search [[selectedSource.title]]"></iron-icon>
+      </paper-button>
+    </paper-card>
+  </template>
+
+  <script src="uqlibrary-fryer-search.js"></script>
+</dom-module>
